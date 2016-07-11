@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class WeatherDataProcessor {
+public class WeatherDataProcessorMain {
 
     /**
      * @param args the command line arguments
