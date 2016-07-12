@@ -37,6 +37,7 @@ public class WeatherDataLogic extends DifferDataLogicBase {
         return false;
     }
     
+    @Override
     public String processResult(String line) {
         try {        
             return extractDay(line);
