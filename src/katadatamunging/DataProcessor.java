@@ -23,7 +23,6 @@ public class DataProcessor {
     }
     
     public void processStream(BufferedReader br) throws IOException {
-        dataLogic.processHeader(br);
         String line;
         while ((line = br.readLine()) != null) {
             Integer diff = dataLogic.provideDiff(line);

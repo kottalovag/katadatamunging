@@ -5,10 +5,6 @@
  */
 package katadatamunging;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-
 public interface IDataLogic {
-    void processHeader(BufferedReader br) throws IOException;
     Integer provideDiff(String line);
 }

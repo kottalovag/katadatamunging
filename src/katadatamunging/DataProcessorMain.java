@@ -18,8 +18,9 @@ public class DataProcessorMain {
         String inputFileName = args[0];
         try {
             BufferedReader br = new BufferedReader(new FileReader(inputFileName));
-            //WeatherDataLogic dataLogic = new WeatherDataLogic();
-            SoccerDataLogic dataLogic = new SoccerDataLogic();
+            String headerLine = br.readLine();            
+            //WeatherDataLogic dataLogic = new WeatherDataLogic(headerLine);
+            SoccerDataLogic dataLogic = new SoccerDataLogic(headerLine);
             DataProcessor dataProcessor = new DataProcessor(dataLogic);
             dataProcessor.processStream(br);
             System.out.println(dataLogic.processResult(dataProcessor.getWinnerLine()));

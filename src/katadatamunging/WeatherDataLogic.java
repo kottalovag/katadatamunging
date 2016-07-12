@@ -1,52 +1,44 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package katadatamunging;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-
-public class WeatherDataLogic implements IDataLogic {
-    private DataRuler dataRuler;
+public class WeatherDataLogic extends DifferDataLogicBase {
+    private final int columnDayIdx = 0;
+    private final int columnMaxTIdx = 1;
+    private final int columnMinTIdx = 2;
     
+    public WeatherDataLogic(String headerLine) {
+        super(new DataRuler(headerLine, SEPARATOR_REGEX));
+    }
+
     @Override
-    public void processHeader(BufferedReader br) throws IOException {
-        String headerLine = br.readLine();
-        dataRuler = new DataRuler(headerLine, "\\s+");
+    protected int getColumn1() {
+        return columnMaxTIdx;
+    }
+
+    @Override
+    protected int getColumn2() {
+        return columnMinTIdx;
     }
     
+    private String extractDay(String line) throws DataFormatException {
+        return getDataRuler().extractContent(line, columnDayIdx);
+    }
+
     @Override
-    public Integer provideDiff(String line) {
-        if (!dataRuler.mightProvideContent(line, 2)) {
-            return null;
-        }
-        boolean dayColumnIsCorrect = false;
+    protected boolean isDataLineValid(String line) {
         try {
-            String rawDay = dataRuler.extractContent(line, 0);
-            dayColumnIsCorrect = rawDay.matches("\\d+");
+            return extractDay(line).matches("\\d+");
         } catch (DataFormatException ex) {
             System.err.println("This was not supposed to happen with the day: " + ex);
-        }
-        if (!dayColumnIsCorrect) {
-            return null;
-        }
-        try {
-            return DataDiffer.calculateIntDiff(line, dataRuler, 1, 2);
-        } catch (DataFormatException ex) {
-            System.err.println("This was not supposed to happen while differing: " + ex);
-            return null;
+            return false;
         }
     }
     
     public String processResult(String line) {
         try {        
-            String content = dataRuler.extractContent(line, 0);
-            return content;
+            return extractDay(line);
         } catch (DataFormatException ex) {
             System.err.println("This was not supposed to happen with the day: " + ex);
+            return "";
         }
-        return "";
     }
 }
