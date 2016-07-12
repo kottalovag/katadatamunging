@@ -52,6 +52,7 @@ public class SoccerDataLogic extends DifferDataLogicBase {
         }
     }    
     
+    @Override
     public String processResult(String line) {
         try {        
             String content = getDataRuler().extractContent(line, TEAM_HEADER);
