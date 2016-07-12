@@ -32,9 +32,18 @@ public class DataRuler {
         return headers.length;
     }
     
+    public int getColumnIdx(String header) {
+        return headerColumnIndices.get(header);
+    }
+    
     public boolean mightProvideContent(String line, int columnIdx) {
         int headerStartPos = headerStartPositions[columnIdx];
         return line.length() >= headerStartPos;
+    }
+    
+    public boolean mightProvideContent(String line, String header) {
+        int columnIdx = headerColumnIndices.get(header);
+        return mightProvideContent(line, columnIdx);
     }
     
     private int detectContentLeftBound(String line, int columnIdx) throws DataFormatException {
