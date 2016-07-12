@@ -7,6 +7,10 @@ import java.io.IOException;
 
 public class DataProcessorMain {
 
+    
+    public static void performProcessing(IDataLogic dataLogic) {
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -18,7 +22,7 @@ public class DataProcessorMain {
         String inputFileName = args[0];
         try {
             BufferedReader br = new BufferedReader(new FileReader(inputFileName));
-            String headerLine = br.readLine();            
+            String headerLine = br.readLine();        
             //WeatherDataLogic dataLogic = new WeatherDataLogic(headerLine);
             SoccerDataLogic dataLogic = new SoccerDataLogic(headerLine);
             DataProcessor dataProcessor = new DataProcessor(dataLogic);
