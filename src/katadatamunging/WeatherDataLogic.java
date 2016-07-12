@@ -28,11 +28,13 @@ public class WeatherDataLogic extends DifferDataLogicBase {
     @Override
     protected boolean isDataLineValid(String line) {
         try {
-            return extractDay(line).matches(DAY_REGEX);
+            if (getDataRuler().mightProvideContent(line, columnDayIdx)) {
+                return extractDay(line).matches(DAY_REGEX);
+            }
         } catch (DataFormatException ex) {
             System.err.println("This was not supposed to happen with the day: " + ex);
-            return false;
-        }
+        } 
+        return false;
     }
     
     public String processResult(String line) {
