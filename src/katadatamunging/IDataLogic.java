@@ -1,5 +1,6 @@
 package katadatamunging;
 
 public interface IDataLogic {
-    Integer provideDiff(String line);
+    public Integer provideDiff(String line);
+    public String processResult(String winnerLine);
 }
