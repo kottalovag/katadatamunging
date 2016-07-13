@@ -1,4 +1,4 @@
-package katadatamunging;
+package main.java;
 
 public class WeatherDataLogic extends DifferDataLogicBase {
     private static final String DAY_REGEX = "\\d+";

@@ -1,4 +1,4 @@
-package katadatamunging;
+package main.java;
 
 public class DataFormatException extends Exception {
     public DataFormatException() { super(); }

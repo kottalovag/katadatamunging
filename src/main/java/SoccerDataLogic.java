@@ -1,4 +1,4 @@
-package katadatamunging;
+package main.java;
 
 public class SoccerDataLogic extends DifferDataLogicBase {    
     private static final String NUM_HEADER = "##";

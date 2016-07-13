@@ -1,4 +1,4 @@
-package katadatamunging;
+package main.java;
 
 public abstract class DifferDataLogicBase implements IDataLogic {
     protected static final String SEPARATOR_REGEX = "\\s+";

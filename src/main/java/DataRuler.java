@@ -1,4 +1,4 @@
-package katadatamunging;
+package main.java;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
