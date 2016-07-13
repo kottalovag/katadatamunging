@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class DataProcessorMain {    
-    private static final String MODE_WEATHER = "weather";
-    private static final String MODE_SOCCER = "soccer";
-    private static final String[] MODES = {MODE_WEATHER, MODE_SOCCER};
+    public static final String MODE_WEATHER = "weather";
+    public static final String MODE_SOCCER = "soccer";
+    public static final String[] MODES = {MODE_WEATHER, MODE_SOCCER};
     
     private static boolean checkArgs(String[] args) {
         boolean ok = true;
@@ -48,26 +48,33 @@ public class DataProcessorMain {
         }
     }
     
+    public static String processInputFile(String inputFileName, String mode) throws FileNotFoundException, IOException {
+        BufferedReader br = new BufferedReader(new FileReader(inputFileName));
+        String headerLine = br.readLine();        
+        IDataLogic dataLogic = createDataLogic(mode, headerLine);
+        DataProcessor dataProcessor = new DataProcessor(dataLogic);
+        dataProcessor.processStream(br);
+        return dataLogic.processResult(dataProcessor.getWinnerLine());
+    }
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws DataFormatException {
+    public static void main(String[] args) {
         if (!checkArgs(args)) {
             return;
         }
         String inputFileName = args[1];
         String mode = args[0];
         try {
-            BufferedReader br = new BufferedReader(new FileReader(inputFileName));
-            String headerLine = br.readLine();        
-            IDataLogic dataLogic = createDataLogic(mode, headerLine);
-            DataProcessor dataProcessor = new DataProcessor(dataLogic);
-            dataProcessor.processStream(br);
-            System.out.println(dataLogic.processResult(dataProcessor.getWinnerLine()));
+            String result = processInputFile(inputFileName, mode);
+            System.out.println(result);
+            return;
         } catch (FileNotFoundException exc) {
             System.err.println("Input file not found:" + exc.toString());
         } catch (IOException exc) {
             System.err.println("Problem while reading file: " + exc.toString());
         }
+        System.out.println("There were errors during processing.");
     }
 }
