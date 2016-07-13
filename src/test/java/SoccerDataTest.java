@@ -5,14 +5,14 @@ import static org.junit.Assert.*;
 
 public class SoccerDataTest {
     @Test public void testDataProcessorMainWithSoccerData() {
-        String testFileName = "input/football.dat";
+        String testFileName = "src/test/resources/football.dat";
         String mode = DataProcessorMain.MODE_SOCCER;
         String expectedResult = "Aston_Villa";
         String result = "";
         try {
             result = DataProcessorMain.processInputFile(testFileName, mode);
         } catch (IOException ex) {
-            System.out.println("Problem: " + ex);
+            System.err.println("Problem: " + ex);
         }
         assertEquals("DataProcessorMain.processInputFile should return " + expectedResult, 
                 expectedResult, result);
