@@ -11,7 +11,7 @@ public class DataProcessorMainTest {
         } catch (IOException ex) {
             System.err.println("Problem: " + ex);
         }
-        assertEquals("DataProcessorMain.processInputFile should return " + expectedResult, 
+        assertEquals("DataProcessorMain.processInputFile should return ", 
             expectedResult, result);
     }
     
